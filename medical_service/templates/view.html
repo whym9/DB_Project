@@ -1,0 +1,44 @@
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+    <meta charset="UTF-8">  
+    <title>Country Records</title>  
+     {% load static %}  
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"/>  
+</head>  
+<body>  
+<table class="table table-striped table-bordered table-sm">  
+    <thead class="thead-dark">  
+    
+    <tr>  
+        {% for n in Names %}
+        <th>{{Name}} {{n}}</th>
+        {% endfor %}  
+        <th>Actions</th>  
+    </tr>  
+    
+    </thead>  
+    <tbody>  
+{% for object, key in Objects %}  
+    <tr>   
+        {% for field in object %} 
+        <td>{{field}}</td>
+        {% endfor %}
+        <td>  
+            <a href="{{link}}_edit/{{key}}"><span class="glyphicon glyphicon-pencil" >Edit</span></a>  
+            <a href="{{link}}_delete/{{key}}">Delete</a>  
+        </td>  
+    </tr>  
+{% endfor %}  
+    </tbody>  
+</table>  
+<br>  
+<br>  
+<center><a href="{{link}}" class="btn btn-primary">Add New Record</a></center>  
+<form method="POST" class="post-form" action="/"> 
+{% csrf_token %}  
+<br>  <button type="submit" class="btn btn-primary">Go Back</button>  
+</form>
+
+</body>  
+</html>  
